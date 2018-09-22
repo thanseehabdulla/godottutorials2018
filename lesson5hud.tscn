@@ -1,0 +1,155 @@
+[gd_scene load_steps=2 format=2]
+
+[sub_resource type="GDScript" id=1]
+
+script/source = "extends CanvasLayer
+
+signal startgame
+
+
+
+
+# class member variables go here, for example:
+# var a = 2
+# var b = \"textvar\"
+
+func _ready():
+	# Called when the node is added to the scene for the first time.
+	# Initialization here
+	pass
+
+#func _process(delta):
+#	# Called every frame. Delta is time since last frame.
+#	# Update game logic here.
+#	pass
+
+func show_message(text):
+	$messagelabel.text = text
+	$messagelabel.show()
+	$messagetimer.start()
+	pass
+
+
+func show_game_over():
+	show_message(\"game over\")
+	#yeild($messagetimer,\"timeout\")
+	$startbutton.show()
+	$messagelabel.text = \"Game Over\"
+	$messagelabel.show()
+	pass
+
+func update_score(score):
+    $scoretimer.text = str(score)
+
+func _on_startbutton_pressed():
+	$startbutton.hide()
+	emit_signal(\"startgame\")
+	pass # replace with function body
+
+
+func _on_messagetimer_timeout():
+	$messagelabel.hide()
+	pass # replace with function body
+
+
+func _on_Control_startgame():
+	pass # replace with function body
+"
+
+[node name="Control" type="CanvasLayer"]
+
+layer = 1
+offset = Vector2( 0, 0 )
+rotation = 0.0
+scale = Vector2( 1, 1 )
+transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+script = SubResource( 1 )
+_sections_unfolded = [ "Anchor" ]
+
+[node name="scoretimer" type="Label" parent="." index="0"]
+
+anchor_left = 0.5
+anchor_top = 0.0
+anchor_right = 0.5
+anchor_bottom = 0.0
+margin_left = 22.0
+margin_top = 60.0
+margin_right = 62.0
+margin_bottom = 74.0
+rect_scale = Vector2( 5, 5 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+text = "0"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "Rect" ]
+
+[node name="messagelabel" type="Label" parent="." index="1"]
+
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -366.0
+margin_top = -86.0
+margin_right = -203.0
+margin_bottom = -72.0
+rect_scale = Vector2( 5, 5 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+text = "thanseeh game is back"
+uppercase = true
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "Rect" ]
+
+[node name="startbutton" type="Button" parent="." index="2"]
+
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -56.0
+margin_top = -214.0
+margin_right = 188.0
+margin_bottom = -119.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+text = "start button"
+flat = false
+align = 1
+_sections_unfolded = [ "Rect", "custom_fonts" ]
+
+[node name="messagetimer" type="Timer" parent="." index="3"]
+
+process_mode = 1
+wait_time = 2.0
+one_shot = false
+autostart = false
+
+[connection signal="startgame" from="." to="." method="_on_Control_startgame"]
+
+[connection signal="pressed" from="startbutton" to="." method="_on_startbutton_pressed"]
+
+[connection signal="timeout" from="messagetimer" to="." method="_on_messagetimer_timeout"]
+
+

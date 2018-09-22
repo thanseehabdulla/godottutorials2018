@@ -9,6 +9,7 @@
 
 script/source = "extends Area2D
 signal hit
+signal die
 # class member variables go here, for example:
 # var a = 2
 # var b = \"textvar\"
@@ -16,6 +17,7 @@ signal hit
 export (int) var speed = 200
 var screensize
 var pos = Vector2()
+var health = 1
 
 func _ready():
 	# Called when the node is added to the scene for the first time.
@@ -61,16 +63,27 @@ func _process(delta):
 
 #capture player entered a body and emit the signal hit
 func _on_player_body_entered(body):
-	hide()
 	emit_signal(\"hit\")
 	pass # replace with function body
 
 #inilize position ofr player at the start
-func start():
-	position = pos
+func start(post):
+	position = post
 	show()
 	$CollisionShape2D.disabled = false
 	pass
+
+
+func _on_player_hit():
+	if health == 0 :
+		emit_signal(\"die\")
+		hide()
+	health -= 1
+	pass # replace with function body
+
+
+func _on_player_die():
+	pass # replace with function body
 "
 
 [sub_resource type="SpriteFrames" id=2]
@@ -93,7 +106,7 @@ custom_solver_bias = 0.0
 radius = 10.0
 height = 20.0
 
-[node name="player" type="Area2D" index="0"]
+[node name="player" type="Area2D"]
 
 position = Vector2( 494.182, 215.307 )
 input_pickable = true
@@ -120,8 +133,14 @@ _sections_unfolded = [ "Transform" ]
 
 position = Vector2( -0.0630021, 1.39095 )
 scale = Vector2( 2.70775, 1.67045 )
+z_index = 1
 shape = SubResource( 3 )
+_sections_unfolded = [ "Z Index" ]
 
 [connection signal="body_entered" from="." to="." method="_on_player_body_entered"]
+
+[connection signal="die" from="." to="." method="_on_player_die"]
+
+[connection signal="hit" from="." to="." method="_on_player_hit"]
 
 
