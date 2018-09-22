@@ -76,7 +76,7 @@ func _notification(what):
             print(\"This is the same as overriding _process()...\")
 "
 
-[node name="Node" type="Node" index="0"]
+[node name="Node" type="Node"]
 
 script = SubResource( 1 )
 

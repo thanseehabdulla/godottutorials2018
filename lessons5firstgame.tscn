@@ -1,0 +1,110 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://dodge_assets/art/playerGrey_walk1.png" type="Texture" id=1]
+[ext_resource path="res://dodge_assets/art/playerGrey_walk2.png" type="Texture" id=2]
+[ext_resource path="res://dodge_assets/art/playerGrey_up1.png" type="Texture" id=3]
+[ext_resource path="res://dodge_assets/art/playerGrey_up2.png" type="Texture" id=4]
+
+[sub_resource type="GDScript" id=1]
+
+script/source = "extends Area2D
+
+# class member variables go here, for example:
+# var a = 2
+# var b = \"textvar\"
+
+export (int) var speed = 200
+var screensize
+
+func _ready():
+	# Called when the node is added to the scene for the first time.
+	# Initialization here
+	screensize = get_viewport_rect().size
+	pass
+
+#func _process(delta):
+#	# Called every frame. Delta is time since last frame.
+#	# Update game logic here.
+#	pass
+
+
+func _process(delta):
+	var velocity = Vector2()
+	if Input.is_action_pressed(\"ui_up\"):
+		velocity.y -= 1
+	if Input.is_action_pressed(\"ui_down\"):
+		velocity.y += 1
+	if Input.is_action_pressed(\"ui_right\"):
+		velocity.x += 1
+	if Input.is_action_pressed(\"ui_left\"):
+		velocity.x -= 1
+	if velocity.length() > 0:
+		velocity = velocity.normalized() * speed
+		$AnimatedSprite.play()
+	else:
+		$AnimatedSprite.stop()
+	position += velocity * delta
+	position.x = clamp(position.x,0 , screensize.x)
+	position.y = clamp(position.y,0 , screensize.y)
+	
+	if velocity.x != 0:
+		$AnimatedSprite.animation = \"right\"
+		$AnimatedSprite.flip_v = false
+		$AnimatedSprite.flip_h = velocity.x < 0 
+	elif velocity.y !=0:
+		$AnimatedSprite.animation=\"up\"
+		$AnimatedSprite.flip_v = velocity.y > 0
+	
+	pass
+"
+
+[sub_resource type="SpriteFrames" id=2]
+
+animations = [ {
+"frames": [ ExtResource( 1 ), ExtResource( 2 ) ],
+"loop": true,
+"name": "right",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 3 ), ExtResource( 4 ) ],
+"loop": true,
+"name": "up",
+"speed": 5.0
+} ]
+
+[sub_resource type="CapsuleShape2D" id=3]
+
+custom_solver_bias = 0.0
+radius = 10.0
+height = 20.0
+
+[node name="Area2D" type="Area2D" index="0"]
+
+position = Vector2( 494.182, 215.307 )
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
+script = SubResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+speed = 200
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="." index="0"]
+
+scale = Vector2( 0.5, 0.5 )
+frames = SubResource( 2 )
+animation = "up"
+_sections_unfolded = [ "Transform" ]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
+
+position = Vector2( -0.0630021, 1.39095 )
+scale = Vector2( 2.70775, 1.67045 )
+shape = SubResource( 3 )
+
+
