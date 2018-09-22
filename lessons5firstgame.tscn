@@ -17,7 +17,7 @@ signal die
 export (int) var speed = 200
 var screensize
 var pos = Vector2()
-var health = 1
+var health = 2
 
 func _ready():
 	# Called when the node is added to the scene for the first time.
@@ -75,7 +75,7 @@ func start(post):
 
 
 func _on_player_hit():
-	if health == 0 :
+	if health <= 1 :
 		emit_signal(\"die\")
 		hide()
 	health -= 1
@@ -131,8 +131,8 @@ _sections_unfolded = [ "Transform" ]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
 
-position = Vector2( -0.0630021, 1.39095 )
-scale = Vector2( 2.70775, 1.67045 )
+position = Vector2( -0.292441, 1.51367 )
+scale = Vector2( 3.63848, 2.25355 )
 z_index = 1
 shape = SubResource( 3 )
 _sections_unfolded = [ "Z Index" ]
