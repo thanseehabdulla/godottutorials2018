@@ -1,0 +1,42 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://icon.png" type="Texture" id=1]
+
+[sub_resource type="GDScript" id=1]
+
+script/source = "extends Node
+
+# class member variables go here, for example:
+# var a = 2
+# var b = \"textvar\"
+
+func _ready():
+	# Called when the node is added to the scene for the first time.
+	# Initialization here
+	pass
+
+#func _process(delta):
+#	# Called every frame. Delta is time since last frame.
+#	# Update game logic here.
+#	pass
+
+#get the list of enimies available
+var enemies = get_tree().get_nodes_in_group(\"enemies\")
+
+func _on_discovered():
+	get_tree().call_group(\"enimies\",\"player was discovered\")
+	pass
+"
+
+[node name="Node" type="Node" index="0"]
+
+script = SubResource( 1 )
+
+[node name="icon" type="Sprite" parent="." index="0" groups=[
+"enimies",
+]]
+
+position = Vector2( 471.936, 234.565 )
+texture = ExtResource( 1 )
+
+
