@@ -18,22 +18,24 @@ func _ready():
 #	# Update game logic here.
 #	pass
 
+var counter = 0
 
-func _on_Button_pressed():
-	get_node(\"Label\").text = \"thanseeh\"
-	pass # replace with function body
+func _process(delta):
+	counter += delta
+	get_node(\"Label\").text = str(int(counter))
+	pass
 "
 
-[node name="Panel" type="Panel"]
+[node name="Panel" type="Panel" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 352.0
-margin_top = 226.0
-margin_right = 678.0
-margin_bottom = 355.0
+margin_left = 430.0
+margin_top = 195.0
+margin_right = 563.0
+margin_bottom = 251.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 0
@@ -51,46 +53,23 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 46.0
-margin_top = 16.0
-margin_right = 300.0
-margin_bottom = 44.0
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 49.0
+margin_bottom = 14.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
-text = "please press bottom"
+text = "counter"
+align = 1
+valign = 1
+uppercase = true
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
-
-[node name="Button" type="Button" parent="." index="1"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 116.0
-margin_top = 72.0
-margin_right = 234.0
-margin_bottom = 118.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-group = null
-text = "press me"
-flat = false
-align = 1
-
-[connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]
+_sections_unfolded = [ "Margin" ]
 
 
