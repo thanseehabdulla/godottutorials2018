@@ -8,17 +8,19 @@
 [sub_resource type="GDScript" id=1]
 
 script/source = "extends Area2D
-
+signal hit
 # class member variables go here, for example:
 # var a = 2
 # var b = \"textvar\"
 
 export (int) var speed = 200
 var screensize
+var pos = Vector2()
 
 func _ready():
 	# Called when the node is added to the scene for the first time.
 	# Initialization here
+	#hide()
 	screensize = get_viewport_rect().size
 	pass
 
@@ -56,6 +58,19 @@ func _process(delta):
 		$AnimatedSprite.flip_v = velocity.y > 0
 	
 	pass
+
+#capture player entered a body and emit the signal hit
+func _on_player_body_entered(body):
+	hide()
+	emit_signal(\"hit\")
+	pass # replace with function body
+
+#inilize position ofr player at the start
+func start():
+	position = pos
+	show()
+	$CollisionShape2D.disabled = false
+	pass
 "
 
 [sub_resource type="SpriteFrames" id=2]
@@ -78,7 +93,7 @@ custom_solver_bias = 0.0
 radius = 10.0
 height = 20.0
 
-[node name="Area2D" type="Area2D" index="0"]
+[node name="player" type="Area2D" index="0"]
 
 position = Vector2( 494.182, 215.307 )
 input_pickable = true
@@ -106,5 +121,7 @@ _sections_unfolded = [ "Transform" ]
 position = Vector2( -0.0630021, 1.39095 )
 scale = Vector2( 2.70775, 1.67045 )
 shape = SubResource( 3 )
+
+[connection signal="body_entered" from="." to="." method="_on_player_body_entered"]
 
 
