@@ -97,7 +97,7 @@ _data = {
 "points": PoolVector2Array( 0, 0, 0, 0, 3.59436, -6.02179, 0, 0, 0, 0, 1016.94, -22.8407, 0, 0, 0, 0, 1012.73, 578.437, 0, 0, 0, 0, 12.0039, 603.665, 0, 0, 0, 0, 3.59436, -6.02179 )
 }
 
-[node name="Node2D" type="Node2D" index="0"]
+[node name="Node2D" type="Node2D"]
 
 script = SubResource( 1 )
 mobi = ExtResource( 1 )
