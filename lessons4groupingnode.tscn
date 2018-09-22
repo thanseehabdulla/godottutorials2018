@@ -10,22 +10,70 @@ script/source = "extends Node
 # var a = 2
 # var b = \"textvar\"
 
+var anchu
+
+
+#instancing a scene
+#var scene = load(\"res://lesson2areaobject.tscn\") # Will load when the script is instanced.
+#prelaoding an instance can more convinient
+var scene = preload(\"res://lesson2areaobject.tscn\") # Will load when parsing the script.
+
+
+
+
 func _ready():
 	# Called when the node is added to the scene for the first time.
 	# Initialization here
+	#creating child by scripting
+	anchu = Sprite.new()
+	add_child(anchu)
+	#instancing a scene
+	var node = scene.instance()
+	add_child(node)
 	pass
+
+#clear a child
+func clear_child():
+	#anchu.free() #delete at the spot
+	anchu.queue_free() #deletes when idle
+	pass
+
 
 #func _process(delta):
 #	# Called every frame. Delta is time since last frame.
 #	# Update game logic here.
 #	pass
 
+func _physics_process(delta):
+    # This is called every physics frame.
+    pass
+
+func _enter_tree():
+    # When the node enters the _Scene Tree_, it becomes active
+    # and  this function is called. Children nodes have not entered
+    # the active scene yet. In general, it's better to use _ready()
+    # for most cases.
+    pass
+
+func _exit_tree():
+    # When the node exits the _Scene Tree_, this function is called.
+    # Children nodes have all exited the _Scene Tree_ at this point
+    # and all became inactive.
+    pass
+
 #get the list of enimies available
-var enemies = get_tree().get_nodes_in_group(\"enemies\")
+#var enemies = get_tree().get_nodes_in_group(\"enimies\")
 
 func _on_discovered():
 	get_tree().call_group(\"enimies\",\"player was discovered\")
 	pass
+
+func _notification(what):
+    match what:
+        NOTIFICATION_READY:
+            print(\"This is the same as overriding _ready()...\")
+        NOTIFICATION_PROCESS:
+            print(\"This is the same as overriding _process()...\")
 "
 
 [node name="Node" type="Node" index="0"]
