@@ -14,3 +14,11 @@ func _ready():
 #	# Called every frame. Delta is time since last frame.
 #	# Update game logic here.
 #	pass
+
+
+func _on_TextureButton_pressed():
+	_on_goto_scene_pressed()
+	pass # replace with function body
+
+func _on_goto_scene_pressed():
+	get_node("/root/global").goto_scene("res://lessons5main.tscn")

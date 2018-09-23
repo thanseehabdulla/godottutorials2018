@@ -134,4 +134,6 @@ anims/intro = SubResource( 2 )
 blend_times = [  ]
 _sections_unfolded = [ "Playback Options" ]
 
+[connection signal="pressed" from="TextureButton" to="." method="_on_TextureButton_pressed"]
+
 

@@ -11,7 +11,7 @@ config_version=3
 [application]
 
 config/name="New Game Project"
-run/main_scene="res://lessons5main.tscn"
+run/main_scene="res://lessson9animationsplashscreen.tscn"
 config/icon="res://icon.png"
 
 [autoload]
