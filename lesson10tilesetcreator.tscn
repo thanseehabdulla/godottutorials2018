@@ -4,17 +4,12 @@
 
 [node name="Node2D" type="Node2D"]
 
-position = Vector2( 461.962, 235.092 )
-__meta__ = {
-"_edit_group_": true
-}
+position = Vector2( 418.671, 214.654 )
 
-[node name="Sprite" type="Sprite" parent="." index="0"]
+[node name="StaticBody2D" type="StaticBody2D" parent="." index="0"]
 
-texture = ExtResource( 1 )
-
-[node name="StaticBody2D" type="StaticBody2D" parent="Sprite" index="0"]
-
+position = Vector2( 98.5729, 19.6429 )
+scale = Vector2( 0.894133, 0.914013 )
 input_pickable = false
 collision_layer = 1
 collision_mask = 1
@@ -23,9 +18,20 @@ constant_angular_velocity = 0.0
 friction = 1.0
 bounce = 0.0
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Sprite/StaticBody2D" index="0"]
+[node name="Sprite" type="Sprite" parent="StaticBody2D" index="0"]
 
+position = Vector2( -41.5857, -10.5676 )
+scale = Vector2( 1, 1 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 70, 70 )
+_sections_unfolded = [ "Region" ]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D" index="1"]
+
+position = Vector2( -41.4862, -11.3399 )
+scale = Vector2( 0.625996, 0.636539 )
 build_mode = 0
-polygon = PoolVector2Array( -12.3521, -12.5525, -32.1577, -31.0378, 31.6605, -30.1575, 29.4599, 30.1397, -31.2775, 30.5799, -33.038, -31.918, -33.038, -31.918, -22.0348, -13.4327, -22.0348, -13.4327, -22.0348, -13.4327, -20.2743, -12.9926 )
+polygon = PoolVector2Array( -50.544, -51.0929, 56.6232, -51.0929, 54.0093, 51.1688, -54.9003, 52.007 )
 
 
