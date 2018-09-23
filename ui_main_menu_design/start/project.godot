@@ -10,15 +10,15 @@ config_version=3
 
 [application]
 
-config/name="New Game Project"
-run/main_scene="res://lessons5main.tscn"
+config/name="Design a main menu screen (start)"
+run/main_scene=""
 config/icon="res://icon.png"
 
 [display]
 
-window/stretch/mode="2d"
-window/stretch/aspect="keep"
+window/size/width=1366
+window/size/height=768
 
-[rendering]
+[gdnative]
 
-environment/default_environment="res://default_env.tres"
+singletons=[  ]
