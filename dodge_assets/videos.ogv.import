@@ -1,0 +1,14 @@
+[remap]
+
+importer="Theora"
+type="VideoStreamTheora"
+path="res://.import/videos.ogv-d88cb3186d0611ab9ba0bb675d021b7b.ogvstr"
+
+[deps]
+
+source_file="res://dodge_assets/videos.ogv"
+dest_files=[ "res://.import/videos.ogv-d88cb3186d0611ab9ba0bb675d021b7b.ogvstr" ]
+
+[params]
+
+loop=true
