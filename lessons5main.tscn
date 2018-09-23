@@ -15,6 +15,8 @@ script/source = "extends Node2D
 # var b = \"textvar\"
 
 export (PackedScene) var mobi = preload(\"res://lesson5mob.tscn\")
+onready var tween = $Tween
+
 var score
 
 func _ready():
@@ -45,6 +47,10 @@ func new_game():
 	$Control.show_message(\"Get Ready\")
 	$player.show()
 	$player.start($Position2D.position)
+	tween.interpolate_property(self,\"player\",0,1,200,Tween.TRANS_LINEAR,Tween.EASE_IN)
+	if not tween.is_active():
+		tween.start()
+	
 	$starttimer.start()
 	pass
 
@@ -97,7 +103,7 @@ _data = {
 "points": PoolVector2Array( 0, 0, 0, 0, 3.59436, -6.02179, 0, 0, 0, 0, 1016.94, -22.8407, 0, 0, 0, 0, 1012.73, 578.437, 0, 0, 0, 0, 12.0039, 603.665, 0, 0, 0, 0, 3.59436, -6.02179 )
 }
 
-[node name="Node2D" type="Node2D"]
+[node name="Node2D" type="Node2D" index="0"]
 
 script = SubResource( 1 )
 mobi = ExtResource( 1 )
@@ -122,33 +128,42 @@ color = Color( 0.808594, 0.214783, 0.214783, 1 )
 
 [node name="player" parent="." index="1" instance=ExtResource( 2 )]
 
-[node name="mobtimer" type="Timer" parent="." index="2"]
+[node name="Tween" type="Tween" parent="." index="2"]
+
+repeat = false
+playback_process_mode = 1
+playback_speed = 1.0
+playback/active = false
+playback/repeat = false
+playback/speed = 1.0
+
+[node name="mobtimer" type="Timer" parent="." index="3"]
 
 process_mode = 1
 wait_time = 0.5
 one_shot = false
 autostart = false
 
-[node name="scoretimer" type="Timer" parent="." index="3"]
+[node name="scoretimer" type="Timer" parent="." index="4"]
 
 process_mode = 1
 wait_time = 1.0
 one_shot = false
 autostart = false
 
-[node name="starttimer" type="Timer" parent="." index="4"]
+[node name="starttimer" type="Timer" parent="." index="5"]
 
 process_mode = 1
 wait_time = 2.0
 one_shot = true
 autostart = false
 
-[node name="Position2D" type="Position2D" parent="." index="5"]
+[node name="Position2D" type="Position2D" parent="." index="6"]
 
 position = Vector2( 240, 450 )
 _sections_unfolded = [ "Transform" ]
 
-[node name="Path2D" type="Path2D" parent="." index="6"]
+[node name="Path2D" type="Path2D" parent="." index="7"]
 
 self_modulate = Color( 0.5, 0.6, 1, 0.7 )
 curve = SubResource( 2 )
@@ -166,9 +181,9 @@ cubic_interp = true
 loop = true
 lookahead = 4.0
 
-[node name="Control" parent="." index="7" instance=ExtResource( 3 )]
+[node name="Control" parent="." index="8" instance=ExtResource( 3 )]
 
-[node name="saudio" type="AudioStreamPlayer2D" parent="." index="8"]
+[node name="saudio" type="AudioStreamPlayer2D" parent="." index="9"]
 
 stream = ExtResource( 4 )
 volume_db = 0.0
@@ -179,7 +194,7 @@ attenuation = 1.0
 bus = "Master"
 area_mask = 1
 
-[node name="sgameover" type="AudioStreamPlayer2D" parent="." index="9"]
+[node name="sgameover" type="AudioStreamPlayer2D" parent="." index="10"]
 
 stream = ExtResource( 5 )
 volume_db = 0.0
